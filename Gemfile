@@ -14,4 +14,5 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 5.1'
   gem 'rspec-rails', '~> 3.8'
   gem 'sqlite3', '~> 1.4'
+  gem 'ffaker', '~> 2'
 end
