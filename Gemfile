@@ -9,6 +9,8 @@ gem 'pg', '~> 1.1'
 
 gem 'listen', '~> 3.2'
 
+gem 'graphql', '~> 1.9'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails', '~> 5.1'
