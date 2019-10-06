@@ -1,13 +1,13 @@
 module Types
   class QueryType < Types::BaseObject
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
+    field :departments, [DepartmentType], 'Query for departments', null: true do
+      argument :id, [ID], required: false
+      argument :name, [String], required: false
+      argument :location, [String], required: false
+    end
 
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
+    def departments(**args)
+      Custom::RecordResolver.query(Department, args)
     end
   end
 end
