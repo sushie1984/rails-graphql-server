@@ -12,10 +12,10 @@ gem 'listen', '~> 3.2'
 gem 'graphql', '~> 1.9'
 
 gem 'factory_bot_rails', '~> 5.1'
+gem 'ffaker', '~> 2'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.8'
   gem 'sqlite3', '~> 1.4'
-  gem 'ffaker', '~> 2'
 end
