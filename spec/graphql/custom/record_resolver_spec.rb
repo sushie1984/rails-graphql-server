@@ -36,5 +36,12 @@ RSpec.describe Custom::RecordResolver do
 
       it { is_expected.to contain_exactly(Department) }
     end
+
+    context 'with empty hash as condition' do
+      let(:conditions) { { } }
+      let!(:departments) { create_list(:department, 2) }
+
+      it { is_expected.to contain_exactly(Department, Department) }
+    end
   end
 end

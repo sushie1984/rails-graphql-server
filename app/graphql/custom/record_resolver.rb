@@ -2,6 +2,8 @@ module Custom
   class RecordResolver
     class << self
       def query(model_object, conditions)
+        return model_object.all if conditions.empty?
+
         conditions.reduce(model_object) do |model, (key, value)|
           case key.to_s
           when /limit/
