@@ -15,14 +15,6 @@ module Custom
           end
         end
       end
-
-      private
-
-      def chain(conditions)
-
-
-        chained.join('')
-      end
     end
   end
 end
