@@ -18,11 +18,15 @@ Both types have `has_many` association to each which allows to query also for th
 
 * Clone this github repo
 
-* Run `bundle`
+* Run `gem install bundler` and `bundle`
 
-* Duplicate `env.template` for your desired environments (**suggestions:** `env.development` and `env.test`)
+* Duplicate `env.template` for your desired environments (**example:** `env.development`)
 
-* In your terminal run `rails db:setup` and expect `db/<YOUR-ENVIRONMENT>.sqlite3` files (**suggestions:** `db/development.sqlite3` & `db/test.sqlite3`)
+* Set at least values for `RACK_ENV` and `SQL_DATABASE` (**example**: `development` and `rails_graphql_server_dev`)
+
+* Export variables from `.env` file (**example**: `export $(cat development.env | xargs)`)
+
+* In your terminal run `rails db:setup` and expect `db/<YOUR-ENVIRONMENT>.sqlite3` files (**example:** `db/development.sqlite3`)
 
 * Start rails server with `rails s`
 
