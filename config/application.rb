@@ -33,5 +33,11 @@ module GraphqlServer
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.currencylayer =
+      OpenStruct.new(access_key: ENV.fetch('CURRENCYLAYER_ACCESS_KEY'),
+                     cache: ENV.fetch('CURRENCYLAYER_CACHE'),
+                     source: ENV.fetch('CURRENCYLAYER_SOURCE'),
+                     currencies:
+                      ENV.fetch('CURRENCYLAYER_CURRENCIES').split(','))
   end
 end
