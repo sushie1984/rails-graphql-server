@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2019_10_06_100346) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.string "location"
@@ -20,8 +23,8 @@ ActiveRecord::Schema.define(version: 2019_10_06_100346) do
   end
 
   create_table "departments_employees", id: false, force: :cascade do |t|
-    t.integer "department_id", null: false
-    t.integer "employee_id", null: false
+    t.bigint "department_id", null: false
+    t.bigint "employee_id", null: false
     t.index ["department_id", "employee_id"], name: "index_departments_employees_on_department_id_and_employee_id"
     t.index ["employee_id", "department_id"], name: "index_departments_employees_on_employee_id_and_department_id"
   end
