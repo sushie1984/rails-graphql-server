@@ -12,7 +12,9 @@ Both types have `has_many` association to each which allows to query also for th
 
 * Installed `ruby-2.6.0`
 
-* `Sqlite` & `Postgres` dev-libraries (Stackoverflow is your friend if `bundle` fails)
+* A running postgresql
+
+* `Postgres` dev-libraries (Stackoverflow is your friend if `bundle` fails)
 
 # Installation
 
@@ -24,9 +26,9 @@ Both types have `has_many` association to each which allows to query also for th
 
 * Set at least values for `RACK_ENV` and `SQL_DATABASE` (**example**: `development` and `rails_graphql_server_dev`)
 
-* Export variables from `.env` file (**example**: `export $(cat development.env | xargs)`)
+* Export variables from `.env` file (**example**: `export $(cat env.development | xargs)`)
 
-* In your terminal run `rails db:setup` and expect `db/<YOUR-ENVIRONMENT>.sqlite3` files (**example:** `db/development.sqlite3`)
+* In your terminal run `rails db:setup`
 
 * Start rails server with `rails s`
 
