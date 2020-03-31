@@ -54,5 +54,45 @@ RSpec.describe GraphqlServerSchema do
         it { is_expected.to eq([response_hash]) }
       end
     end
+
+    context 'when querying for currency' do
+      let(:query_type) { 'currencies' }
+      let(:query_conditions) do
+        "source: [\"#{currency.source}\"],
+         publishedAtFrom: \"#{(currency.published_at - 1.day).iso8601}\",
+         publishedAtTo: \"#{(currency.published_at + 1.day).iso8601}\""
+      end
+      let(:query_return_fields) { 'id source publishedAt' }
+
+      let(:currency) { create(:currency) }
+      let(:response_hash) do
+        {
+          'id' => currency.id.to_s,
+          'source' => currency.source,
+          'publishedAt' => currency.published_at.iso8601
+        }
+      end
+
+      it { is_expected.to eq([response_hash]) }
+
+      context 'with targetRates' do
+        let(:query_return_fields) do
+          'id source publishedAt targetRates { currency rate }'
+        end
+        let(:response_hash) do
+          {
+            'id' => currency.id.to_s,
+            'source' => currency.source,
+            'publishedAt' => currency.published_at.iso8601,
+            'targetRates' => target_rates.map do |entry|
+              { 'currency' => entry['target'], 'rate' => entry['rate'] }
+            end
+          }
+        end
+        let(:target_rates) { currency.target_rates }
+
+        it { is_expected.to eq([response_hash]) }
+      end
+    end
   end
 end

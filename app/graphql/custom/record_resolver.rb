@@ -10,6 +10,12 @@ module Custom
             model.limit(value)
           when /offset/
             model.offset(value)
+          when /_from\z/
+            from_key = key[0..-6]
+            model.where("#{from_key} >= ?", value)
+          when /_to\z/
+            to_key = key[0..-4]
+            model.where("#{to_key} <= ?", value)
           else
             model.where(key => value)
           end
