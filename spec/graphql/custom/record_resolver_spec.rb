@@ -43,5 +43,42 @@ RSpec.describe Custom::RecordResolver do
 
       it { is_expected.to contain_exactly(Department, Department) }
     end
+
+    context 'with appended _from condition' do
+      let!(:old_department) { create(:department, created_at: 7.days.ago) }
+      let!(:new_department) { create(:department) }
+      let(:conditions) do
+        { created_at_from: old_department.created_at + 1.day }
+      end
+
+      it 'returns only new department' do
+        is_expected.to contain_exactly(new_department)
+      end
+    end
+
+    context 'with appended _to condition' do
+      let!(:old_department) { create(:department, created_at: 7.days.ago) }
+      let!(:new_department) { create(:department) }
+      let(:conditions) { { created_at_to: new_department.created_at - 1.day } }
+
+      it 'returns only old department' do
+        is_expected.to contain_exactly(old_department)
+      end
+    end
+
+    context 'with appended _from and _to conditions' do
+      let!(:old_department) { create(:department, created_at: 7.days.ago) }
+      let!(:current_department) { create(:department) }
+      let!(:future_department) do
+        create(:department, created_at: 7.days.from_now)
+      end
+      let(:conditions) do
+        { created_at_from: 1.day.ago, created_at_to: 1.day.from_now }
+      end
+
+      it 'returns only current department' do
+        is_expected.to contain_exactly(current_department)
+      end
+    end
   end
 end
