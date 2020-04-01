@@ -32,7 +32,7 @@ Both types have `has_many` association to each which allows to query also for th
 
 * Start rails server with `rails s`
 
-* Now you can perform your `graphql` query against it via a **POST** to http://localhost:3000/graphql/
+* Now you can perform your `graphql` query against it via a **POST** to http://localhost:3000/api/graphql/
 
 # Examples
 
