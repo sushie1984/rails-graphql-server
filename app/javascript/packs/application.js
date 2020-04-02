@@ -15,3 +15,5 @@
 // const imagePath = (name) => images(name, true)
 require("@rails/ujs").start()
 require('jquery')
+import Highcharts from "highcharts"
+window.Highcharts = Highcharts;
