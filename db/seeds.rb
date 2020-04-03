@@ -9,3 +9,15 @@
 
 departments =
   FactoryBot.create_list(:department, 100, :with_employees, employee_count: 10)
+
+to = Date.today
+from = to - 100.days
+(from..to).each do |date|
+  attributes = FactoryBot.attributes_for(:currency,
+                                         :with_random_target_rates,
+                                         published_at: date)
+  Currency.find_or_create_by(source: attributes[:source],
+                             published_at: attributes[:published_at]) do |entry|
+    entry.target_rates = attributes[:target_rates]
+  end
+end
