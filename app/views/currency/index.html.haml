@@ -13,7 +13,7 @@
                    max: Date.today,
                    required: "required",
                    value: Date.today)
-      = hidden_field_tag(:query, @query)
+      = hidden_field_tag(:query)
       = hidden_field_tag('variables[publishedAtFrom]', 5.days.ago.to_date)
       = hidden_field_tag('variables[publishedAtTo]', Date.today)
       = form.submit 'Get currency history'

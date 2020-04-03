@@ -1,4 +1,14 @@
 class CurrencyHistory
+  @GRAPHQL_QUERY: 'query currencies($publishedAtFrom: ISO8601DateTime,
+                           $publishedAtTo: ISO8601DateTime) {
+                             currencies(publishedAtFrom: $publishedAtFrom,
+                                        publishedAtTo: $publishedAtTo) {
+                                          source
+                                          publishedAt
+                                          targetRates { currency rate }
+                             }
+                            }'
+
   @render: (data) =>
     $('#history_body').empty()
     currencies = data['currencies']
@@ -42,6 +52,8 @@ class CurrencyHistory
       )
 
 $(document).ready ->
+  $('#currency_history').children('#query').val(CurrencyHistory.GRAPHQL_QUERY)
+
   $('#currency_published_at_from').change ->
     new_date = event.target.value
     $('#variables_publishedAtFrom').val(new_date)
