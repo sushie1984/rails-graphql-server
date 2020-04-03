@@ -1,0 +1,21 @@
+%h1 Currency rate converter
+.content
+  %h2 Select range
+  .currency_history_header
+    = form_with url: api_graphql_path, id: 'currency_history' do |form|
+      = date_field("currency",
+                   "published_at_from",
+                   max: Date.today,
+                   required: "required",
+                   value: 5.days.ago.to_date)
+      = date_field("currency",
+                   "published_at_to",
+                   max: Date.today,
+                   required: "required",
+                   value: Date.today)
+      = hidden_field_tag(:query)
+      = hidden_field_tag('variables[publishedAtFrom]', 5.days.ago.to_date)
+      = hidden_field_tag('variables[publishedAtTo]', Date.today)
+      = form.submit 'Get currency history'
+  .currency_history_body
+    = render 'history'
