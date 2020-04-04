@@ -18,4 +18,5 @@
       = hidden_field_tag('variables[publishedAtTo]', Date.today)
       = form.submit 'Get currency history'
   .currency_history_body
-    = render 'history'
+    #history_body.content
+      %p Select date range and click on Get currency history
