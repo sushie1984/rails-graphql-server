@@ -10,7 +10,7 @@ Both types have `has_many` association to each which allows to query also for th
 
 # Prerequisites
 
-* Installed `ruby-2.6.0`
+* Installed `ruby-2.6.1`
 
 * A running postgresql
 
