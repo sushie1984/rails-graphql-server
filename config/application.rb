@@ -17,6 +17,7 @@ module GraphqlServer
                      cache: ENV.fetch('CURRENCYLAYER_CACHE'),
                      source: ENV.fetch('CURRENCYLAYER_SOURCE'),
                      currencies:
-                      ENV.fetch('CURRENCYLAYER_CURRENCIES').split(','))
+                      ENV.fetch('CURRENCYLAYER_CURRENCIES').split(','),
+                     base_uri: ENV.fetch('CURRENCYLAYER_BASE_URI'))
   end
 end
