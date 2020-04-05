@@ -18,6 +18,7 @@ gem 'factory_bot_rails', '~> 5.1'
 gem 'ffaker', '~> 2'
 
 gem 'money-currencylayer-bank', '~> 0.5'
+gem 'httparty', '~> 0.18'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
