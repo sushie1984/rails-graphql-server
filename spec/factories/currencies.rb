@@ -16,7 +16,7 @@ FactoryBot.define do
     end
 
     trait :with_random_target_rates do
-      target_rates {
+      foreign_rates {
         [{ 'currency' => 'USD', 'rate' => Random.rand(1.0..1.2) },
          { 'currency' => 'CHF', 'rate' => Random.rand(1.2..1.4) }]
        }

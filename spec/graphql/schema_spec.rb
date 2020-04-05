@@ -58,17 +58,17 @@ RSpec.describe GraphqlServerSchema do
     context 'when querying for currency' do
       let(:query_type) { 'currencies' }
       let(:query_conditions) do
-        "source: [\"#{currency.source}\"],
+        "base: [\"#{currency.base}\"],
          publishedAtFrom: \"#{(currency.published_at - 1.day).iso8601}\",
          publishedAtTo: \"#{(currency.published_at + 1.day).iso8601}\""
       end
-      let(:query_return_fields) { 'id source publishedAt' }
+      let(:query_return_fields) { 'id base publishedAt' }
 
       let(:currency) { create(:currency) }
       let(:response_hash) do
         {
           'id' => currency.id.to_s,
-          'source' => currency.source,
+          'base' => currency.base,
           'publishedAt' => currency.published_at.iso8601
         }
       end
@@ -77,19 +77,19 @@ RSpec.describe GraphqlServerSchema do
 
       context 'with targetRates' do
         let(:query_return_fields) do
-          'id source publishedAt targetRates { currency rate }'
+          'id base publishedAt foreignRates { currency rate }'
         end
         let(:response_hash) do
           {
             'id' => currency.id.to_s,
-            'source' => currency.source,
+            'base' => currency.base,
             'publishedAt' => currency.published_at.iso8601,
-            'targetRates' => target_rates.map do |entry|
-              { 'currency' => entry['target'], 'rate' => entry['rate'] }
+            'foreignRates' => foreign_rates.map do |entry|
+              { 'currency' => entry['currency'], 'rate' => entry['rate'] }
             end
           }
         end
-        let(:target_rates) { currency.target_rates }
+        let(:foreign_rates) { currency.foreign_rates }
 
         it { is_expected.to eq([response_hash]) }
       end
