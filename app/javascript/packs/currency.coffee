@@ -3,9 +3,9 @@ class CurrencyHistory
                            $publishedAtTo: ISO8601DateTime) {
                              currencies(publishedAtFrom: $publishedAtFrom,
                                         publishedAtTo: $publishedAtTo) {
-                                          source
+                                          base
                                           publishedAt
-                                          targetRates { currency rate }
+                                          foreignRates { currency rate }
                              }
                             }'
 
@@ -18,19 +18,19 @@ class CurrencyHistory
   @normalized_highchart_data: (currencies) =>
     highchart_data = {}
     for currency in currencies
-      highchart_item = @upsert_higchart_item(highchart_data, currency.source)
+      highchart_item = @upsert_higchart_item(highchart_data, currency.base)
       highchart_item['categories'].push(currency.publishedAt)
 
-      for target_rates in currency.targetRates
-        series = @upsert_highchart_series(highchart_item, target_rates.currency)
-        series.push(target_rates.rate)
+      for foreign_rate in currency.foreignRates
+        series = @upsert_highchart_series(highchart_item, foreign_rate.currency)
+        series.push(foreign_rate.rate)
 
     highchart_data
 
-  @upsert_higchart_item: (highchart_data, source) =>
-      if not highchart_data["#{source}"]?
-        highchart_data["#{source}"] = { 'categories': [], 'series': {} }
-      highchart_data["#{source}"]
+  @upsert_higchart_item: (highchart_data, base) =>
+      if not highchart_data["#{base}"]?
+        highchart_data["#{base}"] = { 'categories': [], 'series': {} }
+      highchart_data["#{base}"]
 
   @upsert_highchart_series: (highchart_item, currency) =>
       series = highchart_item['series']
@@ -39,13 +39,13 @@ class CurrencyHistory
       series["#{currency}"]
 
   @build_highcharts: (highchart_data) ->
-    for source, highchart_item of highchart_data
-      chart_id = "currency_history_#{source}"
+    for base, highchart_item of highchart_data
+      chart_id = "currency_history_#{base}"
       $('#history_body').append("<div id=\"#{chart_id}\">")
       Highcharts.chart(chart_id,
         title: { text: 'Currency History' },
         xAxis: { categories: highchart_item['categories'] },
-        yAxis: { title: { text: source } },
+        yAxis: { title: { text: base } },
         series: do ->
             for currency, series of highchart_item.series
               { name: currency, data: series }
