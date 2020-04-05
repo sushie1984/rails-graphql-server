@@ -27,7 +27,7 @@ class CurrenciesController < ApplicationController
   end
 
   def foreign_rates
-    currency.target_rates
+    currency.target_rates || currency.foreign_rates
   end
 
   def foreign_currency

@@ -39,9 +39,9 @@ RSpec.describe CurrenciesController, type: :controller do
         currency: { base: base, value: value, foreign: foreign }
       }
     end
-    let(:base) { currency.source }
+    let(:base) { currency.base }
     let(:value) { 1.0 }
-    let(:foreign) { currency.target_rates.sample['target'] }
+    let(:foreign) { currency.foreign_rates.sample['currency'] }
 
     let(:currency_exchanger) do
       instance_double(CurrencyExchanger, foreign_rate_for: 1)
@@ -65,7 +65,7 @@ RSpec.describe CurrenciesController, type: :controller do
 
     it 'initializes service class with source and target_rates' do
       expect(CurrencyExchanger).to receive(:new)
-        .with(base, currency.target_rates)
+        .with(base, currency.foreign_rates)
         .and_call_original
 
       get :exchange, xhr: true, params: exchange_params

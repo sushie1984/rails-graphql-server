@@ -1,25 +1,16 @@
 module Currencylayer
   class RatingQuotes
-    def initialize(source, update_rates, published_at, target_currencies)
-      @source = source
-      @update_rates = update_rates
+    def initialize(base, foreign_rates_update, published_at)
+      @base = base
+      @foreign_rates_update = foreign_rates_update
       @published_at = published_at
-      @target_currencies = target_currencies
     end
 
     def upsert
-      target_rates = @update_rates.select { |entry| relevant_country?(entry) }
-
-      entry = Currency.find_or_initialize_by(source: @source,
-                                             published_at: @published_at)
-      entry.target_rates = target_rates
+      entry =
+        Currency.find_or_initialize_by(base: @base, published_at: @published_at)
+      entry.foreign_rates = @foreign_rates_update
       entry.save
-    end
-
-    private
-
-    def relevant_country?(entry)
-      @target_currencies.include?(entry.fetch('target'))
     end
   end
 end

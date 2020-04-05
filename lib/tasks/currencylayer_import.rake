@@ -5,10 +5,9 @@ namespace :currencylayer_import do
     bank.expire_rates! if bank.expired?
     restructured_rates =
       Currencylayer::TargetRatesPresenter.new(bank.update_rates).restructure
-    target_currencies = Rails.application.config.currencylayer.currencies
     Currencylayer::RatingQuotes.new(bank.source,
                                     restructured_rates,
-                                    bank.rates_timestamp,
-                                    target_currencies).upsert
+                                    bank.rates_timestamp)
+                                .upsert
   end
 end

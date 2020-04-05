@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_30_101635) do
+ActiveRecord::Schema.define(version: 2020_04_05_093449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2020_03_30_101635) do
     t.json "target_rates"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "base", default: "", null: false
+    t.json "foreign_rates", default: [], null: false
   end
 
   create_table "departments", force: :cascade do |t|
