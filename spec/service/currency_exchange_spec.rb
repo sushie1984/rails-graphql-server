@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe CurrencyExchanger do
   let(:exchanger) { described_class.new(base_currency, foreign_rates) }
   let(:foreign_rates) { [euro_to_dollar, swiss_franc_to_dollar]}
-  let(:euro_to_dollar) { { 'target' => 'EUR', 'rate' => 0.5 } }
-  let(:swiss_franc_to_dollar) { { 'target' => 'CHF', 'rate' => 0.8 } }
+  let(:euro_to_dollar) { { 'currency' => 'EUR', 'rate' => 0.5 } }
+  let(:swiss_franc_to_dollar) { { 'currency' => 'CHF', 'rate' => 0.8 } }
 
   describe '#foreign_rate_for' do
     subject(:foreign_rate_for) { exchanger.foreign_rate_for(foreign_currency) }

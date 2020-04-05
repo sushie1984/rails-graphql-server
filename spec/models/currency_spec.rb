@@ -11,10 +11,10 @@ RSpec.describe Currency, type: :model do
     end
   end
 
-  describe '#target_rates' do
-    subject(:target_rates) { currency.target_rates }
+  describe '#foreign_rates' do
+    subject(:foreign_rates) { currency.foreign_rates }
     let(:currency) { described_class.create(attributes) }
 
-    it { is_expected.to eq(attributes[:target_rates]) }
+    it { is_expected.to eq(attributes[:foreign_rates]) }
   end
 end

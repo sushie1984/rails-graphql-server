@@ -5,17 +5,17 @@ RSpec.describe CurrencyHelper, type: :helper do
     subject(:available_options) { helper.available_options(currency) }
     let(:currency) do
       FactoryBot.create(:currency,
-                        source: source,
-                        target_rates: [{ 'target': target}])
+                        base: base,
+                        foreign_rates: [{ 'currency': foreign}])
     end
-    let(:source) { 'FOO' }
-    let(:target) { 'BAR' }
+    let(:base) { 'FOO' }
+    let(:foreign) { 'BAR' }
 
     it { is_expected.to eq([['FOO', 'FOO'], ['BAR', 'BAR']]) }
 
-    context 'when source and target are the same' do
-      let(:source) { 'FOO' }
-      let(:target) { source }
+    context 'when base and foreign are the same' do
+      let(:base) { 'FOO' }
+      let(:foreign) { base }
 
       it { is_expected.to eq([['FOO', 'FOO']]) }
     end

@@ -11,7 +11,6 @@ module Types
     end
 
     field :currencies, [CurrencyType], 'Query for currencies', null: true do
-      argument :source, [String], required: false
       argument :base, [String], required: false
       argument :publishedAtFrom,
                 GraphQL::Types::ISO8601DateTime,
