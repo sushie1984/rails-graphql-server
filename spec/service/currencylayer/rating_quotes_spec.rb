@@ -2,20 +2,19 @@ require 'rails_helper'
 
 RSpec.describe Currencylayer::RatingQuotes do
   let(:quotes) do
-    described_class.new(source, update_rates, published_at, target_currencies)
+    described_class.new(base, foreign_rates_update, published_at)
   end
-  let(:source) { currency[:source] }
-  let(:update_rates) { currency[:target_rates] }
+  let(:base) { currency[:base] }
+  let(:foreign_rates_update) { currency[:foreign_rates] }
   let(:published_at) { currency[:published_at] }
   let(:currency) { attributes_for(:currency) }
-  let(:target_currencies) { update_rates.map { |entry| entry['target'] } }
 
   describe '#upsert' do
     subject(:upsert) { quotes.upsert }
 
     it 'upserts currency' do
       expect { upsert }
-        .to change { Currency.where(source: source).count }
+        .to change { Currency.where(base: base).count }
         .from(0)
         .to(1)
     end
@@ -27,23 +26,24 @@ RSpec.describe Currencylayer::RatingQuotes do
 
       it 'does not persist another entry for this currency' do
         expect { upsert }
-          .not_to change { Currency.where(source: source).count }
+          .not_to change { Currency.where(base: base).count }
       end
 
       context 'with a newer rates' do
-        let(:fixed_update_rates) { [{ 'target' => 'USD', 'rate' => 1.1 }] }
-        let(:upsert_fixed_rates) do
-          described_class.new(source,
-                              fixed_update_rates,
-                              published_at,
-                              target_currencies).upsert
+        let(:newer_foreign_rates_update) do
+          [{ 'target' => 'USD', 'rate' => 1.1 }]
+        end
+        let(:upsert_newer_foreign_rates) do
+          described_class.new(base,
+                              newer_foreign_rates_update,
+                              published_at).upsert
         end
 
         it 'updates target_rates of currency entry' do
-          expect { upsert_fixed_rates }
-            .to change { Currency.find_by(source: source).target_rates }
-            .from(update_rates)
-            .to(fixed_update_rates)
+          expect { upsert_newer_foreign_rates }
+            .to change { Currency.find_by(base: base).foreign_rates }
+            .from(foreign_rates_update)
+            .to(newer_foreign_rates_update)
         end
       end
     end
