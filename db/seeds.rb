@@ -16,8 +16,8 @@ from = to - 100.days
   attributes = FactoryBot.attributes_for(:currency,
                                          :with_random_target_rates,
                                          published_at: date)
-  Currency.find_or_create_by(source: attributes[:source],
+  Currency.find_or_create_by(base: attributes[:base],
                              published_at: attributes[:published_at]) do |entry|
-    entry.target_rates = attributes[:target_rates]
+    entry.foreign_rates = attributes[:foreign_rates]
   end
 end
