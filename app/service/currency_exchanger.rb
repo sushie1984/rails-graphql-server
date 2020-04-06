@@ -20,7 +20,7 @@ class CurrencyExchanger
   end
 
   def rate_for(currency)
-    (@foreign_rates.find {|entry| entry['currency'] == currency} || {})['rate']
+    (@foreign_rates.find { |entry| entry['currency'] == currency } || {})['rate']
   end
 
   def inverse_rate
