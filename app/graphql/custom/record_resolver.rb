@@ -6,6 +6,12 @@ module Custom
       def query(model_object, conditions)
         return model_object.all if conditions.empty?
 
+        result(model_object, conditions)
+      end
+
+      private
+
+      def result(model_object, conditions)
         conditions.reduce(model_object) do |model, (key, value)|
           case key.to_s
           when /limit/

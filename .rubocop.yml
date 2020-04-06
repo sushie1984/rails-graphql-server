@@ -17,3 +17,7 @@ Style/WordArray:
 Layout/LineLength:
   Exclude:
     - 'db/schema.rb'
+Metrics/BlockLength:
+  Exclude:
+    - 'db/schema.rb'
+    - 'spec/**/*_spec.rb'
