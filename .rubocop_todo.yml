@@ -37,10 +37,3 @@ Naming/MethodParameterName:
 # Offense count: 31
 Style/Documentation:
   Enabled: false
-
-# Offense count: 34
-# Cop supports --auto-correct.
-# Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
-# URISchemes: http, https
-Layout/LineLength:
-  Max: 121

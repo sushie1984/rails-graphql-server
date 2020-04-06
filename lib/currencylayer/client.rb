@@ -13,13 +13,15 @@ module Currencylayer
     end
 
     def fetch_history(date:, currencies:)
-      response = self.class.get('/historical', query: query.merge({
-                                                                    date: as_iso8601(date),
-                                                                    currencies: as_comma_separated(currencies)
-                                                                  }))
+      query_params =
+        { date: as_iso8601(date), currencies: as_comma_separated(currencies) }
+      response = self.class.get('/historical',
+                                query: default_query_params.merge(query_params))
 
       parsed_response = response.parsed_response.with_indifferent_access
-      raise UnsuccessfullQueryError, parsed_response['error'] unless parsed_response['success']
+      unless parsed_response['success']
+        raise UnsuccessfullQueryError, parsed_response['error']
+      end
 
       OpenStruct.new(parsed_response)
     end
@@ -34,7 +36,7 @@ module Currencylayer
       currencies.to_a.join(',')
     end
 
-    def query
+    def default_query_params
       { access_key: @access_key, source: @source }
     end
   end

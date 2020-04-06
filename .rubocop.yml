@@ -14,3 +14,6 @@ Style/StringLiterals:
 Style/WordArray:
   Exclude:
     - 'db/schema.rb'
+Layout/LineLength:
+  Exclude:
+    - 'db/schema.rb'
