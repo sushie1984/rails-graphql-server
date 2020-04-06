@@ -11,3 +11,6 @@ Style/NumericLiterals:
 Style/StringLiterals:
   Exclude:
     - 'db/schema.rb'
+Style/WordArray:
+  Exclude:
+    - 'db/schema.rb'

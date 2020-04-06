@@ -22,7 +22,7 @@ RSpec.describe Currencylayer::Client do
       client.fetch_history(date: date, currencies: currencies)
     end
     let(:date) { Date.today }
-    let(:currencies) { ['USD', 'CHF'] }
+    let(:currencies) { %w[USD CHF] }
 
     it 'responds with OpenStruct' do
       expect(fetch_history).to be_a(OpenStruct)

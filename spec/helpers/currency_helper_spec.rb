@@ -13,13 +13,13 @@ RSpec.describe CurrencyHelper, type: :helper do
     let(:base) { 'FOO' }
     let(:foreign) { 'BAR' }
 
-    it { is_expected.to eq([['FOO', 'FOO'], ['BAR', 'BAR']]) }
+    it { is_expected.to eq([%w[FOO FOO], %w[BAR BAR]]) }
 
     context 'when base and foreign are the same' do
       let(:base) { 'FOO' }
       let(:foreign) { base }
 
-      it { is_expected.to eq([['FOO', 'FOO']]) }
+      it { is_expected.to eq([%w[FOO FOO]]) }
     end
   end
 end
