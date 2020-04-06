@@ -40,12 +40,6 @@ Style/Documentation:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/IfUnlessModifier:
-  Exclude:
-    - 'lib/currencylayer/client.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 # Configuration parameters: MinDigits, Strict.
 Style/NumericLiterals:
   Exclude:

@@ -19,9 +19,7 @@ module Currencylayer
                                                                   }))
 
       parsed_response = response.parsed_response.with_indifferent_access
-      unless parsed_response['success']
-        raise UnsuccessfullQueryError, parsed_response['error']
-      end
+      raise UnsuccessfullQueryError, parsed_response['error'] unless parsed_response['success']
 
       OpenStruct.new(parsed_response)
     end
