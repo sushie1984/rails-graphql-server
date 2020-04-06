@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :currencylayer_import do
   desc "Daily import of most accurate currency"
   task daily: :environment do

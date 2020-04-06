@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CurrenciesController < ApplicationController
   def index
     @currency = Currency.order(published_at: :asc).last

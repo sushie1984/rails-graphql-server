@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Custom
   class RecordResolver
     class << self

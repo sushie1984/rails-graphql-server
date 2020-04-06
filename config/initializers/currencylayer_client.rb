@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'currencylayer/client'
 
 base_uri = Rails.application.config.currencylayer.base_uri

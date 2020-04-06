@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :one_time_tasks do
   desc "Currency data migration for updated schema"
   task currency_data_migration: :environment do

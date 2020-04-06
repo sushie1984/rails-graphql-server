@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class EmployeeType < Types::BaseObject
     field :id, ID, 'The unique id of the employee', null: false

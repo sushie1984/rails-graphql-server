@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Currency < ApplicationRecord
   def self.upsert_for!(base:, foreign_rates:, published_at:)
     entry = where(published_at:

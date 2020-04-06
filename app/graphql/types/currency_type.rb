@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class CurrencyType < Types::BaseObject
     field :id, ID, 'The unique id of the currency entry', null: false

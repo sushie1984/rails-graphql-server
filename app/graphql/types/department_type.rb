@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class DepartmentType < Types::BaseObject
     field :id, ID, 'The unique id of the department', null: false
