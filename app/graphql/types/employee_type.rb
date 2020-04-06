@@ -1,7 +1,7 @@
 module Types
   class EmployeeType < Types::BaseObject
     field :id, ID, 'The unique id of the employee', null: false
-    field :name, String, 'The name of the employee',  null: true
+    field :name, String, 'The name of the employee', null: true
     field :age, Integer, 'The age of the employee', null: true
     field :yearlySalary,
           Float,

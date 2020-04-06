@@ -26,7 +26,7 @@ RSpec.describe Currency, type: :model do
     end
     let(:base) { attributes[:base] }
     let(:foreign_rates) { attributes[:foreign_rates] }
-    let(:published_at) { attributes[:published_at]  }
+    let(:published_at) { attributes[:published_at] }
     let(:attributes) { FactoryBot.attributes_for(:currency) }
 
     it 'upserts currency' do
@@ -40,7 +40,7 @@ RSpec.describe Currency, type: :model do
       let!(:currency) { FactoryBot.create(:currency) }
       let(:base) { currency.base }
       let(:foreign_rates) { currency.foreign_rates }
-      let(:published_at) { currency.published_at.end_of_day  }
+      let(:published_at) { currency.published_at.end_of_day }
 
       it 'does not persist another entry for this currency' do
         expect { upsert_for }
