@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe CurrencyExchanger do
   let(:exchanger) { described_class.new(base_currency, foreign_rates) }
-  let(:foreign_rates) { [euro_to_dollar, swiss_franc_to_dollar]}
+  let(:foreign_rates) { [euro_to_dollar, swiss_franc_to_dollar] }
   let(:euro_to_dollar) { { 'currency' => 'EUR', 'rate' => 0.5 } }
   let(:swiss_franc_to_dollar) { { 'currency' => 'CHF', 'rate' => 0.8 } }
 

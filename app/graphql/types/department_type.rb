@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Types
   class DepartmentType < Types::BaseObject
     field :id, ID, 'The unique id of the department', null: false
-    field :name, String, 'The name of the department',  null: true
+    field :name, String, 'The name of the department', null: true
     field :location,
           String,
           'The name of the phyiscal location of this department',

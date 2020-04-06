@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Currencylayer
   class HistoricalCurrency
     def initialize(date, currencies)

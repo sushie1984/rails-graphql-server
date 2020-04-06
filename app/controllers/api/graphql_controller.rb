@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   class GraphqlController < ApiController
     def execute
@@ -8,24 +10,28 @@ module Api
         # Query context goes here, for example:
         # current_user: current_user,
       }
-      result = GraphqlServerSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+      result = schema_query(query, variables, context, operation_name)
       render json: result
-    rescue => e
+    rescue StandardError => e
       raise e unless Rails.env.development?
+
       handle_error_in_development e
     end
 
     private
 
+    def schema_query(query, variables, context, operation_name)
+      GraphqlServerSchema.execute(query,
+                                  variables: variables,
+                                  context: context,
+                                  operation_name: operation_name)
+    end
+
     # Handle form data, JSON body, or a blank value
     def ensure_hash(ambiguous_param)
       case ambiguous_param
       when String
-        if ambiguous_param.present?
-          ensure_hash(JSON.parse(ambiguous_param))
-        else
-          {}
-        end
+        to_hash(ambiguous_param)
       when Hash, ActionController::Parameters
         ambiguous_param
       when nil
@@ -35,11 +41,21 @@ module Api
       end
     end
 
-    def handle_error_in_development(e)
-      logger.error e.message
-      logger.error e.backtrace.join("\n")
+    def to_hash(ambiguous_param)
+      return {} if ambiguous_param.blank?
 
-      render json: { error: { message: e.message, backtrace: e.backtrace }, data: {} }, status: 500
+      ensure_hash(JSON.parse(ambiguous_param))
+    end
+
+    def handle_error_in_development(err)
+      logger.error err.message
+      logger.error err.backtrace.join("\n")
+
+      render json:
+        {
+          error: { message: err.message, backtrace: err.backtrace },
+          data: {}
+        }, status: 500
     end
   end
 end

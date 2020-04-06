@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Currencylayer::Quotes do
-  let(:quotes) { described_class.new(source, currencylayer_quotes ) }
-  let(:source) { response[:source]}
+  let(:quotes) { described_class.new(source, currencylayer_quotes) }
+  let(:source) { response[:source] }
   let(:currencylayer_quotes) { response[:quotes] }
   let(:response) { attributes_for(:currencylayer_response) }
 

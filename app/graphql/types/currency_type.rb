@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Types
   class CurrencyType < Types::BaseObject
     field :id, ID, 'The unique id of the currency entry', null: false
     field :base,
-           String,
-           'The base currency that this entry relates to',
-           null: false
+          String,
+          'The base currency that this entry relates to',
+          null: false
     field :foreignRates,
           [ForeignRateType, null: true],
           'A list containing foreign rates for base currency',

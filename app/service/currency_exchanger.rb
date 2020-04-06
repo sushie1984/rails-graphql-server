@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UnknownCurrency < StandardError; end
 
 class CurrencyExchanger
@@ -20,7 +22,8 @@ class CurrencyExchanger
   end
 
   def rate_for(currency)
-    (@foreign_rates.find {|entry| entry['currency'] == currency} || {})['rate']
+    rate = @foreign_rates.find { |entry| entry['currency'] == currency } || {}
+    rate['rate']
   end
 
   def inverse_rate

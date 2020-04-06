@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class ForeignRateType < Types::BaseObject
     field :currency, String, 'The currency label', null: false

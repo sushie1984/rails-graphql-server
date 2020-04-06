@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe CurrenciesController, type: :controller do
-  describe "GET #index" do
-    it "returns http success" do
+  describe 'GET #index' do
+    it 'returns http success' do
       get :index
       expect(response).to have_http_status(:success)
     end
@@ -18,7 +20,7 @@ RSpec.describe CurrenciesController, type: :controller do
   describe 'GET #show' do
     let(:currency) { FactoryBot.create(:currency) }
 
-    it "returns http success" do
+    it 'returns http success' do
       get :show, params: { id: currency.id }
       expect(response).to have_http_status(:success)
     end
@@ -51,7 +53,7 @@ RSpec.describe CurrenciesController, type: :controller do
       allow(CurrencyExchanger).to receive(:new).and_return(currency_exchanger)
     end
 
-    it "returns http success" do
+    it 'returns http success' do
       get :exchange, xhr: true, params: exchange_params
 
       expect(response).to have_http_status(:success)
