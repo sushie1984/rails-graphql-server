@@ -1,0 +1,2 @@
+# Append new scheduled rake tasks here
+* 8 * * * ash -c 'cd /usr/src/app && bundle exec rake currencylayer_import:daily >> /var/log/cron.log 2>&1'

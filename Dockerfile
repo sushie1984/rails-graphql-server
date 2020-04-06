@@ -4,8 +4,15 @@ MAINTAINER Sascha Burku <sascha_burku@yahoo.de>
 
 RUN apk update --no-cache && \
     apk upgrade && \
-    apk add build-base postgresql-dev nodejs-current yarn && \
+    apk add build-base postgresql-dev nodejs-current yarn tzdata && \
+    cp /usr/share/zoneinfo/Europe/Prague /etc/localtime && \
+    echo "Europe/Vienna" > /etc/timezone && \
+    apk del tzdata && \
     rm -rf /var/cache/apk/*
+
+CMD chown root:root /etc/crontabs/root && /usr/sbin/crond -f
+
+RUN touch /var/log/cron.log
 
 RUN bundle config --global frozen 1
 
