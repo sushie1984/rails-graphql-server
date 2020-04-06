@@ -13,8 +13,6 @@ module Types
           'A list of employees working in this department',
           null: true
 
-    def employees
-      object.employees
-    end
+    delegate :employees, to: :object
   end
 end

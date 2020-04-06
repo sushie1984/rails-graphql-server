@@ -2,7 +2,7 @@
 
 FactoryBot.create_list(:department, 100, :with_employees, employee_count: 10)
 
-to = Date.today
+to = Time.zone.today
 from = to - 100.days
 (from..to).each do |date|
   attributes = FactoryBot.attributes_for(:currency,

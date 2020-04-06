@@ -20,8 +20,6 @@ module Types
           'A list of departments this employee belongs to',
           null: true
 
-    def departments
-      object.departments
-    end
+    delegate :departments, to: :object
   end
 end
