@@ -19,8 +19,6 @@ module Types
           null: false,
           method: :published_at
 
-    def target_rates
-      object.target_rates
-    end
+    delegate :target_rates, to: :object
   end
 end
