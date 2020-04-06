@@ -25,6 +25,19 @@ services:
       - "3000:3000"
     depends_on:
       - db
+  cron:
+    build: .
+    image: graphql-server-web:2.6.1
+    container_name: graphql-server-cron
+    env_file:
+      - env.development
+    networks:
+      - db
+    depends_on:
+      - db
+    volumes:
+      - ./crontabs:/etc/crontabs
+    entrypoint: ["/usr/sbin/crond", "-f", "-l", "8"]
 volumes:
   dbdata:
 networks:
