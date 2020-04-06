@@ -3,7 +3,7 @@
 namespace :currencylayer_import do
   desc 'Daily import of most accurate currency'
   task daily: :environment do
-    today = Date.today
+    today = Time.zone.today
     currencies = Rails.application.config.currencylayer.currencies
     Currencylayer::HistoricalCurrency.new(today, currencies).import!
   end

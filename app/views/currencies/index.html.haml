@@ -2,20 +2,22 @@
 .content
   %h2 Select range
   .currency_history_header
+    - today = Time.zone.today
+    - five_days_ago = 5.days.ago.to_date
     = form_with url: api_graphql_path, id: 'currency_history' do |form|
       = date_field("currency",
                    "published_at_from",
-                   max: Date.today,
+                   max: today,
                    required: "required",
-                   value: 5.days.ago.to_date)
+                   value: five_days_ago)
       = date_field("currency",
                    "published_at_to",
-                   max: Date.today,
+                   max: today,
                    required: "required",
-                   value: Date.today)
+                   value: today)
       = hidden_field_tag(:query)
-      = hidden_field_tag('variables[publishedAtFrom]', 5.days.ago.to_date)
-      = hidden_field_tag('variables[publishedAtTo]', Date.today)
+      = hidden_field_tag('variables[publishedAtFrom]', five_days_ago)
+      = hidden_field_tag('variables[publishedAtTo]', today)
       = form.submit 'Get currency history'
   .currency_history_body
     #history_body.content

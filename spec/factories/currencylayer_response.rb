@@ -5,7 +5,7 @@ FactoryBot.define do
     quotes { { 'USDEUR' => 0.895375, 'USDCHF' => 0.951265 } }
     source { 'USD' }
     success { true }
-    date { Date.today.iso8601 }
+    date { Time.zone.today.iso8601 }
 
     trait :unsuccessfull do
       success { false }
