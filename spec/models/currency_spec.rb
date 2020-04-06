@@ -46,7 +46,7 @@ RSpec.describe Currency, type: :model do
 
       it 'does not persist another entry for this currency' do
         expect { upsert_for }
-          .not_to change { Currency.where(base: base).count }
+          .not_to(change { Currency.where(base: base).count })
       end
 
       context 'with updated foreign_rates' do
