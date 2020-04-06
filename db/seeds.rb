@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-departments =
-  FactoryBot.create_list(:department, 100, :with_employees, employee_count: 10)
+FactoryBot.create_list(:department, 100, :with_employees, employee_count: 10)
 
 to = Date.today
 from = to - 100.days
