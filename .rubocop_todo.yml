@@ -17,13 +17,6 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Max: 17
 
-# Offense count: 1
-# Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
-# AllowedNames: io, id, to, by, on, in, at, ip, db, os, pp
-Naming/MethodParameterName:
-  Exclude:
-    - 'app/controllers/api/graphql_controller.rb'
-
 # Offense count: 31
 Style/Documentation:
   Enabled: false

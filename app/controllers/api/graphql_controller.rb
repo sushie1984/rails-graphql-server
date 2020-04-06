@@ -41,13 +41,13 @@ module Api
       end
     end
 
-    def handle_error_in_development(e)
-      logger.error e.message
-      logger.error e.backtrace.join("\n")
+    def handle_error_in_development(err)
+      logger.error err.message
+      logger.error err.backtrace.join("\n")
 
       render json:
         {
-          error: { message: e.message, backtrace: e.backtrace },
+          error: { message: err.message, backtrace: err.backtrace },
           data: {}
         }, status: 500
     end
