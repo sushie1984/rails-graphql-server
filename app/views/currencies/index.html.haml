@@ -1,5 +1,9 @@
 %h1 Currency rate converter
 .content
+  - if @currency.nil?
+    %p{style: "color:red"}
+      No currency data available |
+      (IT buzzword: "rake currencylayer_import:daily")
   %h2 Select range
   .currency_history_header
     - today = Time.zone.today
@@ -18,7 +22,7 @@
       = hidden_field_tag(:query)
       = hidden_field_tag('variables[publishedAtFrom]', five_days_ago)
       = hidden_field_tag('variables[publishedAtTo]', today)
-      = form.submit 'Get currency history'
+      = form.submit 'Get currency history', disabled: @currency.nil?
   .currency_history_body
     #history_body.content
       %p Select date range and click on Get currency history
