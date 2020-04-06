@@ -6,7 +6,7 @@ RSpec.describe CurrencyHelper, type: :helper do
     let(:currency) do
       FactoryBot.create(:currency,
                         base: base,
-                        foreign_rates: [{ 'currency': foreign}])
+                        foreign_rates: [{ 'currency': foreign }])
     end
     let(:base) { 'FOO' }
     let(:foreign) { 'BAR' }
