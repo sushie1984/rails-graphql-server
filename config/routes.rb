@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    post "/graphql", to: "graphql#execute"
+    post '/graphql', to: 'graphql#execute'
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 namespace :one_time_tasks do
-  desc "Currency data migration for updated schema"
+  desc 'Currency data migration for updated schema'
   task currency_data_migration: :environment do
     Currency.where(base: '').find_in_batches do |currencies|
       currencies.each do |currency|

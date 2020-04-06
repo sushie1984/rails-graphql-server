@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :currencylayer_response, class: Hash do
-    quotes { { "USDEUR" => 0.895375, "USDCHF" => 0.951265 } }
+    quotes { { 'USDEUR' => 0.895375, 'USDCHF' => 0.951265 } }
     source { 'USD' }
     success { true }
     date { Date.today.iso8601 }

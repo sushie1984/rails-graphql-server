@@ -8,3 +8,6 @@ Style/FrozenStringLiteralComment:
 Style/NumericLiterals:
   Exclude:
     - 'db/schema.rb'
+Style/StringLiterals:
+  Exclude:
+    - 'db/schema.rb'
