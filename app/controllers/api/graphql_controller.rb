@@ -10,10 +10,7 @@ module Api
         # Query context goes here, for example:
         # current_user: current_user,
       }
-      result = GraphqlServerSchema.execute(query,
-                                           variables: variables,
-                                           context: context,
-                                           operation_name: operation_name)
+      result = schema_query(query, variables, context, operation_name)
       render json: result
     rescue StandardError => e
       raise e unless Rails.env.development?
@@ -23,15 +20,18 @@ module Api
 
     private
 
+    def schema_query(query, variables, context, operation_name)
+      GraphqlServerSchema.execute(query,
+                                  variables: variables,
+                                  context: context,
+                                  operation_name: operation_name)
+    end
+
     # Handle form data, JSON body, or a blank value
     def ensure_hash(ambiguous_param)
       case ambiguous_param
       when String
-        if ambiguous_param.present?
-          ensure_hash(JSON.parse(ambiguous_param))
-        else
-          {}
-        end
+        to_hash(ambiguous_param)
       when Hash, ActionController::Parameters
         ambiguous_param
       when nil
@@ -39,6 +39,12 @@ module Api
       else
         raise ArgumentError, "Unexpected parameter: #{ambiguous_param}"
       end
+    end
+
+    def to_hash(ambiguous_param)
+      return {} if ambiguous_param.blank?
+
+      ensure_hash(JSON.parse(ambiguous_param))
     end
 
     def handle_error_in_development(err)
