@@ -12,9 +12,9 @@ module Currencylayer
 
     def fetch_history(date:, currencies:)
       response = self.class.get('/historical', query: query.merge({
-        date: as_iso8601(date),
-        currencies: as_comma_separated(currencies)
-      }))
+                                                                    date: as_iso8601(date),
+                                                                    currencies: as_comma_separated(currencies)
+                                                                  }))
 
       parsed_response = response.parsed_response.with_indifferent_access
       unless parsed_response['success']

@@ -42,12 +42,12 @@ RSpec.describe GraphqlServerSchema do
             'name' => department.name,
             'location' => department.location,
             'employees' => [{
-                'id' => employee.id.to_s,
-                'name' => employee.name,
-                'age' => employee.age,
-                'yearlySalary' => employee.yearly_salary,
-                'workStart' => employee.work_start.iso8601
-             }]
+              'id' => employee.id.to_s,
+              'name' => employee.name,
+              'age' => employee.age,
+              'yearlySalary' => employee.yearly_salary,
+              'workStart' => employee.work_start.iso8601
+            }]
           }
         end
 
