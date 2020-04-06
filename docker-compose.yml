@@ -9,7 +9,23 @@ services:
       - "5432:5432"
     volumes:
       - "dbdata:/var/lib/postgresql/data"
+    networks:
+      - db
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust #Never use in production!
+  web:
+    build: .
+    image: graphql-server-web:2.6.1
+    container_name: graphql-server-web
+    env_file:
+      - env.development
+    networks:
+      - db
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
 volumes:
   dbdata:
+networks:
+  db:
