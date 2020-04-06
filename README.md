@@ -1,57 +1,30 @@
 # Description
 
-This is demo project which implements a `graphql` in a rails server environment. It implements the 2 following types and its scalar fields:
+This is demo project which focus on `graphql` built into a rails server. Look at `app/graphql/types/*_type.rb` for currently available queries.
 
-* `Deparment`: *id*, *name*, *location*
+Also provides an UI for currency exchange rates.
 
-* `Employee`: *id*, *name*, *age*, *yearlySalary*, *workStart*
+# Installation and starting the service
 
-Both types have `has_many` association to each which allows to query also for their respective nested type association (*employees* and *departments*).
+The service assumes that you `export` various ENV variables which are defined in `env.template`. However for easier setup the following approach is highly recommended:
 
-# Prerequisites
+* Duplicate `env.template` as `env.development` (for testing `env.test`)
 
-* Installed `ruby-2.6.1`
+* In your `env.development` set value for `SQL_DATABASE` (the name of the schema) and `CURRENCYLAYER_ACCESS_KEY` (access_key can be obtain by subscribing to basic (free) at https://currencylayer.com/)
 
-* A running postgresql
+## Via docker and docker-compose
+Assumes/recommends that you have installed `docker` and `docker-compoes`
 
-* `Postgres` dev-libraries (Stackoverflow is your friend if `bundle` fails)
+* Run `docker-compose up -d` to start a postgres instance and a rails server
 
-# Installation
+* Run `docker-compose exec web bundle exec rails db:setup` (or any other `rails`/ `rake` command you prefer to setup up the system)
 
-* Clone this github repo
+## On your system
 
-* Run `gem install bundler` and `bundle`
+Bundle and install the service as any other rails web server
 
-* Duplicate `env.template` for your desired environments (**example:** `env.development`)
+# Using the service
 
-* Set at least values for `RACK_ENV` and `SQL_DATABASE` (**example**: `development` and `rails_graphql_server_dev`)
+* For currency UI open http://localhost:3000/ in your browser (:warning: The values are **fake** ones for demonstration purpose)
 
-* Export variables from `.env` file (**example**: `export $(cat env.development | xargs)`)
-
-* In your terminal run `rails db:setup`
-
-* Start rails server with `rails s`
-
-* Now you can perform your `graphql` query against it via a **POST** to http://localhost:3000/api/graphql/
-
-# Examples
-
-POST the following as **value** of a key `query` of a JSON with your favorite query tool (e.g. `postman` or `curl`)
-
-* Get all departments and select only *id* & *name*:
-
-```
-query { departments { id name } }
-```
-
-* Get all departments as before but also select each *employee* of each department with *yearlySalary*:
-
-```
-query { departments { id name employees { yearlySalary } } }
-```
-
-* Get only departments with id 1 and 2 and include the *employees* with their *names*:
-
-```
-query { departments(id: ["1", "2"]) { name employees { name } } }
-```
+* For **graphql** perform POST request to `api/graphql` (see also [here](app/graphql/QUERY_EXAMPLES.md) for examples)
