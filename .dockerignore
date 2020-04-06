@@ -1,8 +1,9 @@
 .git
 .node_modules
-.log
-.tmp
+log
+tmp
 .byebug_history
 env.*
 docker-compose.yml
 Dockerfile
+crontabs
