@@ -6,7 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
 departments =
   FactoryBot.create_list(:department, 100, :with_employees, employee_count: 10)
 
