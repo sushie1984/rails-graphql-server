@@ -9,6 +9,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-18.04
+    services:
+      postgres:
+        image: postgres:12.2-alpine
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v2
 
@@ -17,3 +24,9 @@ jobs:
 
       - name: Run rubocop on container
         run: docker run sushie1984/rails-graphql-server:$GITHUB_SHA bundle exec rubocop
+
+      - name: Run rspec on container
+        run: |
+          docker run --network host --env-file env.ci sushie1984/rails-graphql-server:$GITHUB_SHA bundle exec rails db:create
+          docker run --network host --env-file env.ci sushie1984/rails-graphql-server:$GITHUB_SHA bundle exec rails db:migrate
+          docker run --network host --env-file env.ci sushie1984/rails-graphql-server:$GITHUB_SHA bundle exec rspec
