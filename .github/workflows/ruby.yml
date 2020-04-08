@@ -1,4 +1,4 @@
-name: Ruby
+name: Docker ruby build
 
 on:
   push:
@@ -7,22 +7,10 @@ on:
     branches: [ master ]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v2
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.6.1
-    - uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: bundle-use-ruby-${{ matrix.os }}-${{ matrix.ruby }}-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          bundle-use-ruby-${{ matrix.os }}-${{ matrix.ruby }}-
-    - name: bundle install
-      run: |
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
-    - name: rubocop
-      run: bundle exe rubocop
+      - uses: actions/checkout@master
+
+      - name: Build Docker image
+        run: docker build --file Dockerfile --tag sushie1984/rails-graphql-server:$GITHUB_SHA .
