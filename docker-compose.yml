@@ -21,6 +21,7 @@ services:
       - env.development
     networks:
       - db
+      - redis
     ports:
       - "3000:3000"
     depends_on:
@@ -38,7 +39,20 @@ services:
     volumes:
       - ./crontabs:/etc/crontabs:ro
     entrypoint: ["/usr/sbin/crond", "-f", "-l", "8"]
+  redis:
+    image: redis:5.0.8-alpine3.11
+    restart: unless-stopped
+    container_name: graphql-server-redis
+    volumes:
+      - "redisdata:/data"
+    networks:
+      - redis
+    ports:
+      - '6379:6379'
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "$REDIS_PASSWORD"]
 volumes:
   dbdata:
+  redisdata:
 networks:
   db:
+  redis:
