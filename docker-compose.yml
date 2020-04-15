@@ -50,6 +50,30 @@ services:
     ports:
       - '6379:6379'
     command: ["redis-server", "--appendonly", "yes", "--requirepass", "$REDIS_PASSWORD"]
+  worker_vip:
+    build: .
+    image: graphql-server-web:2.6.1
+    container_name: graphql-server-worker-vip
+    env_file:
+      - env.development
+    networks:
+      - db
+      - redis
+    depends_on:
+      - db
+    command: ["bundle", "exec", "sidekiq", "-q", "vip"]
+  worker_plebs:
+    build: .
+    image: graphql-server-web:2.6.1
+    container_name: graphql-server-worker-plebs
+    env_file:
+      - env.development
+    networks:
+      - db
+      - redis
+    depends_on:
+      - db
+    command: ["bundle", "exec", "sidekiq", "-q", "vip", "-q", "plebs"]
 volumes:
   dbdata:
   redisdata:

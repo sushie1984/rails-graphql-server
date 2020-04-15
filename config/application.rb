@@ -20,5 +20,11 @@ module GraphqlServer
                      currencies:
                       ENV.fetch('CURRENCYLAYER_CURRENCIES').split(','),
                      base_uri: ENV.fetch('CURRENCYLAYER_BASE_URI'))
+
+    config.redis = OpenStruct.new(host: ENV.fetch('REDIS_HOST'),
+                                  port: ENV.fetch('REDIS_PORT'),
+                                  password: ENV.fetch('REDIS_PASSWORD'))
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
