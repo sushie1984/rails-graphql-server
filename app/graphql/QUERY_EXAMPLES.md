@@ -19,3 +19,13 @@ query { departments { id name employees { yearlySalary } } }
 ```
 query { departments(id: ["1", "2"]) { name employees { name } } }
 ```
+
+* Same as above but with query `variables` approach:
+
+```
+query departments($id: [ID!]) { departments(id: $id) { name employees { name } } }
+```
+
+```
+{ "id": ["1", "2"] }
+```
