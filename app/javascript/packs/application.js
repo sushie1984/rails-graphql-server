@@ -25,3 +25,6 @@ window.Highcharts = Highcharts;
 import '../stylesheets/application.scss';
 
 window.mdc = require('material-components-web');
+
+import './currency.coffee'
+import './navbar.js'
