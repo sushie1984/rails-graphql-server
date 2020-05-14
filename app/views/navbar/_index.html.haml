@@ -1,2 +1,14 @@
-= link_to 'History', currencies_path
-= link_to 'Exchange', currency_path(@currency) if @currency.present?
+= button_tag(id: 'menu', class: 'mdc-button--outlined') do
+  = tag.div(class: 'mdc-button__ripple') do
+    = render 'shared/material_icon', name: 'menu'
+
+= tag.aside(class: 'mdc-drawer mdc-drawer--dismissible') do
+  = tag.div(class: 'mdc-drawer__content') do
+    = tag.nav(class: 'mdc-list') do
+      = link_to(currencies_path,
+                class: 'mdc-list-item mdc-list-item--activated',
+                aria: { current: 'page' }) do
+        = render 'shared/material_icon', name: 'share', text: 'History'
+      - if @currency.present?
+        = link_to(currency_path(@currency), class: 'mdc-list-item') do
+          = render 'shared/material_icon', name: 'euro', text: 'Exchange'

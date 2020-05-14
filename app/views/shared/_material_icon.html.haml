@@ -1,0 +1,6 @@
+= tag.i(name,
+        class: 'material-icons mdc-list-item__graphic',
+        aria: { hidden: 'true'})
+- if defined?(text)
+  = tag.span(class: 'mdc-list-item__text') do
+    = text
