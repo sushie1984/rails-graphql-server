@@ -7,6 +7,16 @@ document.addEventListener("DOMContentLoaded", function(){
       drawer.open = !drawer.open;
   });
 
+  drawer.listen('MDCDrawer:closed', () => {
+    menu = document.getElementById('menu')
+    menu.getElementsByTagName('i')[0].innerText = 'chevron_right'
+  });
+
+  drawer.listen('MDCDrawer:opened', () => {
+    menu = document.getElementById('menu')
+    menu.getElementsByTagName('i')[0].innerText = 'chevron_left'
+  });
+
   mdc_list_item_name = document.getElementById('mdc-drawer-navlist').value;
   const nav_list = drawer.list;
   item = nav_list.listElements.find(item => item.name == mdc_list_item_name);
