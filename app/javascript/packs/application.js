@@ -26,5 +26,6 @@ import '../stylesheets/application.scss';
 
 window.mdc = require('material-components-web');
 
+import './initializers.js'
 import './currency.coffee'
 import './navbar.js'

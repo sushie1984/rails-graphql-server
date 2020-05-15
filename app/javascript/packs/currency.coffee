@@ -52,13 +52,13 @@ class CurrencyHistory
       )
 
 $(document).ready ->
-  $('#currency_history').children('#query').val(CurrencyHistory.GRAPHQL_QUERY)
+  $('#currency_history').find('#query').val(CurrencyHistory.GRAPHQL_QUERY)
 
-  $('#currency_published_at_from').change ->
+  $('#currency_publishedAtFrom').change ->
     new_date = event.target.value
     $('#variables_publishedAtFrom').val(new_date)
 
-  $('#currency_published_at_to').change ->
+  $('#currency_publishedAtTo').change ->
     new_date = event.target.value
     $('#variables_publishedAtTo').val(new_date)
 
