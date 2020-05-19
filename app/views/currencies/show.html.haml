@@ -1,24 +1,45 @@
-%h2 Currency Exchange for #{@currency.published_at}
-.currency_exchange_header
-  = form_with url: exchange_currency_path(@currency.id),
-              remote: :true,
-              method: :get do |form|
-    = label_tag('Value:')
-    = number_field_tag('currency[value]',
-                        nil,
-                        min: 0,
-                        required: true,
-                        step: 0.1)
-    %br
-    %br
-    = label_tag('From:')
-    = select_tag("currency[base]",
-                 options_for_select(available_options(@currency)))
-    = label_tag('To:')
-    = select_tag("currency[foreign]",
-                 options_for_select(available_options(@currency)))
-    %br
-    %br
-    = form.submit 'Calculate Exchange'
-.currency_exchange_body
-  %ul#exchange_body.content
+= hidden_field_tag('mdc-drawer-navlist', 'currencies_show')
+= tag.h5(class: 'mdc-typography--headline5') do
+  Exchange for #{@currency.published_at}
+
+= form_with url: exchange_currency_path(@currency.id),
+            remote: :true,
+            method: :get do |form|
+  = tag.div(class: 'mdc-layout-grid mdc-layout-grid--align-right') do
+    = tag.div(class: 'mdc-layout-grid__inner') do
+      = tag.div(class: 'mdc-layout-grid__cell--span-12') do
+        = label_tag('', class: 'mdc-text-field mdc-text-field--outlined') do
+          = number_field_tag('currency[value]',
+                              nil,
+                              min: 0,
+                              required: true,
+                              step: 0.1,
+                              class: 'mdc-text-field__input unstyled')
+          = tag.span(class: 'mdc-notched-outline') do
+            = tag.span(class: 'mdc-notched-outline__leading')
+            = tag.span(class: 'mdc-notched-outline__notch') do
+              = tag.span(class: 'mdc-floating-label', id: 'currency_value') do
+                Value
+            = tag.span(class: 'mdc-notched-outline__trailing')
+
+      = tag.div(class: 'mdc-layout-grid__cell--span-2') do
+        = render 'currency_selection',
+                  name: 'currency[base]',
+                  id: 'currency_base',
+                  entries: available_options(@currency),
+                  text: 'Base'
+
+      = tag.div(class: 'mdc-layout-grid__cell--span-2') do
+        = render 'currency_selection',
+                  name: 'currency[foreign]',
+                  id: 'currency_foreign',
+                  entries: available_options(@currency),
+                  text: 'Foreign'
+
+  = button_tag(type: 'submit', class: 'mdc-button mdc-button--touch mdc-button--outlined') do
+    = tag.div(class: 'mdc-button__ripple')
+    = tag.span(class: 'mdc-button__label') do
+      Calculate Exchange
+    = tag.div(class: 'mdc-button__touch')
+
+  = tag.ul(id: 'exchange_body', class: 'mdc-list mdc-list--two-line')
