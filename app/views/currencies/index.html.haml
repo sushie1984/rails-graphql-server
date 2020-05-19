@@ -1,6 +1,6 @@
 = hidden_field_tag('mdc-drawer-navlist', 'currencies_index')
 = tag.h5(class: 'mdc-typography--headline5') do
-  Select range
+  History
 
 = form_with url: api_graphql_path, id: 'currency_history' do |form|
   = tag.div(class: 'mdc-layout-grid mdc-layout-grid--align-right') do
@@ -11,22 +11,20 @@
                   text: 'From',
                   selected_date: 5.days.ago.to_date
 
-      = tag.div(class: 'mdc-layout-grid__cell--span-2') do
+      = tag.div(class: 'mdc-layout-grid__cell--span-10') do
         = render 'date_picker',
                   id: 'publishedAtTo',
                   text: 'To',
                   selected_date: Time.zone.today
 
-    = tag.div(class: 'mdc-layout-grid__inner') do
       = tag.div(class: 'mdc-layout-grid__cell mdc-layout-grid__cell--span-12') do
         = hidden_field_tag(:query)
 
-    = tag.div(class: 'mdc-layout-grid__inner') do
       = tag.div(class: 'mdc-layout-grid__cell mdc-layout-grid__cell--span-12') do
         = tag.div(class: 'mdc-touch-target-wrapper') do
           = button_tag(type: 'submit',
                        disabled: @currency.nil?,
-                       class: 'mdc-button mdc-button--touch') do
+                       class: 'mdc-button mdc-button--touch mdc-button--outlined') do
             = tag.div(class: 'mdc-button__ripple')
             = tag.span(class: 'mdc-button__label') do
               Get currency history
