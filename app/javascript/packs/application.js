@@ -13,7 +13,19 @@
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
+
 require("@rails/ujs").start()
 require('jquery')
 import Highcharts from "highcharts"
 window.Highcharts = Highcharts;
+
+import '../stylesheets/application.scss';
+
+window.mdc = require('material-components-web');
+
+import './initializers.js'
+import './currency.coffee'
+import './navbar.js'

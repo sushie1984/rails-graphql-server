@@ -1,0 +1,20 @@
+= tag.div(class: 'mdc-select mdc-select--outlined mdc-select--required') do
+  = tag.div(class: 'mdc-select__anchor', aria: { labelledby: name, required: 'true' }) do
+    = tag.span(class: 'mdc-select__ripple')
+    = text_field_tag(name, nil,
+                     readonly: true,
+                     id: id,
+                     class: 'mdc-select__selected-text')
+    = tag.i(class: 'mdc-select__dropdown-icon')
+    = tag.span(class: 'mdc-notched-outline') do
+      = tag.span(class: 'mdc-notched-outline__leading')
+      = tag.span(class: 'mdc-notched-outline__notch') do
+        = tag.span(id: name, class: 'mdc-floating-label') do
+          = text
+      = tag.span(class: 'mdc-notched-outline__trailing')
+  = tag.div(class: 'mdc-select__menu mdc-menu mdc-menu-surface', role: 'listbox') do
+    = tag.ul(class: 'mdc-list') do
+      - entries.each do |entry|
+        = tag.li(class: 'mdc-list-item', data: { value: entry[0] }, role: 'option') do
+          = tag.span(class: 'mdc-list-item__text') do
+            = entry[1]

@@ -1,2 +1,17 @@
-= link_to 'History', currencies_path
-= link_to 'Exchange', currency_path(@currency) if @currency.present?
+= tag.div(class: 'mdc-layout-grid mdc-layout-grid--align-right') do
+  = tag.div(class: 'mdc-layout-grid__inner') do
+    = tag.div(class: 'mdc-layout-grid__cell mdc-layout-grid__cell--span-1') do
+      = button_tag(id: 'menu', class: 'mdc-button--outlined') do
+        = tag.div(class: 'mdc-button__ripple') do
+          = render 'shared/material_icon', name: 'chevron_left'
+    = tag.div(class: 'mdc-layout-grid__cell mdc-layout-grid__cell--span-11') do
+      = tag.div(class: 'mdc-typography--headline6') do
+        Currency rate converter
+= tag.aside(class: 'mdc-drawer mdc-drawer--dismissible') do
+  = tag.div(class: 'mdc-drawer__content') do
+    = tag.nav(class: 'mdc-list') do
+      = link_to(currencies_path, class: 'mdc-list-item', name: 'currencies_index') do
+        = render 'shared/material_icon', name: 'share', text: 'History'
+      - if @currency.present?
+        = link_to(currency_path(@currency), class: 'mdc-list-item', name: 'currencies_show') do
+          = render 'shared/material_icon', name: 'euro', text: 'Exchange'

@@ -1,3 +1,6 @@
-%li
-  = foreign_rate['target']
-  = foreign_rate['result']
+= tag.li(class: 'mdc-list-item') do
+  = tag.span(class: 'mdc-list-item__text') do
+    = tag.span(class: 'mdc-list-item__primary-text') do
+      = foreign_rate['target']
+    = tag.span(class: 'mdc-list-item__secondary-text') do
+      = foreign_rate['result']

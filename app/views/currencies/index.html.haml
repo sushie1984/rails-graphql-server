@@ -1,28 +1,38 @@
-%h1 Currency rate converter
-.content
-  - if @currency.nil?
-    %p{style: "color:red"}
-      No currency data available |
-      (IT buzzword: "rake currencylayer_import:daily")
-  %h2 Select range
-  .currency_history_header
-    - today = Time.zone.today
-    - five_days_ago = 5.days.ago.to_date
-    = form_with url: api_graphql_path, id: 'currency_history' do |form|
-      = date_field("currency",
-                   "published_at_from",
-                   max: today,
-                   required: "required",
-                   value: five_days_ago)
-      = date_field("currency",
-                   "published_at_to",
-                   max: today,
-                   required: "required",
-                   value: today)
-      = hidden_field_tag(:query)
-      = hidden_field_tag('variables[publishedAtFrom]', five_days_ago)
-      = hidden_field_tag('variables[publishedAtTo]', today)
-      = form.submit 'Get currency history', disabled: @currency.nil?
-  .currency_history_body
-    #history_body.content
-      %p Select date range and click on Get currency history
+= hidden_field_tag('mdc-drawer-navlist', 'currencies_index')
+= tag.h5(class: 'mdc-typography--headline5') do
+  History
+
+= form_with url: api_graphql_path, id: 'currency_history' do |form|
+  = tag.div(class: 'mdc-layout-grid mdc-layout-grid--align-right') do
+    = tag.div(class: 'mdc-layout-grid__inner') do
+      = tag.div(class: 'mdc-layout-grid__cell--span-2') do
+        = render 'date_picker',
+                  id: 'publishedAtFrom',
+                  text: 'From',
+                  selected_date: 5.days.ago.to_date
+
+      = tag.div(class: 'mdc-layout-grid__cell--span-10') do
+        = render 'date_picker',
+                  id: 'publishedAtTo',
+                  text: 'To',
+                  selected_date: Time.zone.today
+
+      = tag.div(class: 'mdc-layout-grid__cell mdc-layout-grid__cell--span-12') do
+        = hidden_field_tag(:query)
+
+      = tag.div(class: 'mdc-layout-grid__cell mdc-layout-grid__cell--span-12') do
+        = tag.div(class: 'mdc-touch-target-wrapper') do
+          = button_tag(type: 'submit',
+                       disabled: @currency.nil?,
+                       class: 'mdc-button mdc-button--touch mdc-button--outlined') do
+            = tag.div(class: 'mdc-button__ripple')
+            = tag.span(class: 'mdc-button__label') do
+              Get currency history
+            = tag.div(class: 'mdc-button__touch')
+
+= tag.div(class: 'mdc-layout-grid') do
+  = tag.div(class: 'mdc-layout-grid__inner') do
+    = tag.div(class: 'mdc-layout-grid__cell mdc-layout-grid__cell--span-12') do
+      = tag.div(id: 'history_body', class: 'content') do
+        = tag.p(class: 'mdc-typography--body1') do
+          Select From* and To* then click on Get currency history

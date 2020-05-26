@@ -1,13 +1,14 @@
 !!!
-%html
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Graphql Playground Server
+= tag.html do
+  = tag.head do
+    = tag.meta(content: 'text/html; charset=UTF-8', http: { equiv: 'Content-Type' })
+    = tag.title do
+      Graphql Playground Server
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'currency'
-  %body
+  = tag.body do
     = render 'navbar/index'
-    = yield
+    = tag.div(class: 'mdc-drawer-app-content') do
+      = yield
