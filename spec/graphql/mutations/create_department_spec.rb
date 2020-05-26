@@ -25,7 +25,7 @@ RSpec.describe Mutations::CreateDepartment do
     context 'when department cannot be created' do
       let(:attributes) { { name: nil, location: nil } }
 
-      it 'responds with no created deparment' do
+      it 'responds with no created department' do
         is_expected.to include(department: nil)
       end
 
