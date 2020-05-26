@@ -17,8 +17,11 @@ document.addEventListener("DOMContentLoaded", function(){
     menu.getElementsByTagName('i')[0].innerText = 'chevron_left'
   });
 
-  mdc_list_item_name = document.getElementById('mdc-drawer-navlist').value;
-  const nav_list = drawer.list;
-  item = nav_list.listElements.find(item => item.name == mdc_list_item_name);
-  item.classList.add('mdc-list-item--activated');
+  hightlightNavMenuEntryOf(drawer.list);
 });
+
+function hightlightNavMenuEntryOf(list) {
+  mdc_list_item_name = document.getElementById('mdc-drawer-navlist').value;
+  item = list.listElements.find(item => item.name == mdc_list_item_name);
+  item.classList.add('mdc-list-item--activated');
+}
